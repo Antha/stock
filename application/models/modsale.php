@@ -25,7 +25,7 @@ class Modsale extends CI_Model {
 
 	function look()
  	{
- 		$result = $this->db->query("select * FROM product");
+ 		$result = $this->db->query("select * FROM sale");
 
  		return $result;
  	}
@@ -39,7 +39,7 @@ class Modsale extends CI_Model {
 
  	function add($dbdata)
  	{
- 		$this->db->insert("product",$dbdata);
+ 		$this->db->insert("sale",$dbdata);
  	}
 
 	function edit($data,$id)

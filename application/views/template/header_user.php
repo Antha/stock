@@ -27,7 +27,7 @@
 				<ul class="nav">
                     <?php
                     echo "<li>".anchor("","Beli")."</li>";
-                    echo "<li>".anchor("sale/look","Pelanggan Terkini")."<li>";
+                    echo "<li>".anchor("sale/viewcustomer","Pelanggan Terkini")."<li>";
                     ?>
 				</ul>
 			</div>

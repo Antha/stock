@@ -1,6 +1,9 @@
 <script src="<?php echo base_url();?>public/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+var my_item_id;
+
 function buy(itemid){
+		my_item_id = itemid;
 		jQuery.ajax({
 		type:"POST",
 		url:"<?php echo base_url();?>index.php/sale/chooseitem",
@@ -39,37 +42,51 @@ $(document).ready(function(){
 	});
 
 	$("input[type=submit]").click(function(){
+		if($('input[name=sale_ktp]').val() == ""){
+			alert("Silahkan masukan No. Kartu Identitas terlebih dahulu");
+			return false;
+		}
+		if($('input[name=sale_name]').val() == ""){
+			alert("Silahkan masukan Nama terlebih dahulu");
+			return false;
+		}
+		if($("#file_pic").val() == ""){
+			alert("Silahkan upload gambar terlebih dahulu");
+			return false;
+		}
+		if($('input[name=item_count]').val() == ""){
+			alert("Silahkan Pilih Jumlah Barang dan Barangnya");
+			return false;
+		}
 
-        /*
-		if($('input[name=sale_ktp]').val() == '')
-		{
-			alert("Isi Ktp");
-			return false;
-		}
-		if($('input[name=sale_name]').val() == '')
-		{
-			alert("Isi Nama Anda");
-			return false;
-		}
-		if($('input[name=sale_item]').val() == '')
-		{
-			alert("Isi Nama Barang");
-			return false;
-		}*/
+		var formfile = new FormData();
+		formfile.append("file_pic",$("#file_pic")[0].files[0]);
+		formfile.append("sale_ktp",$('input[name=sale_ktp]').val());
+		formfile.append("sale_name",$('input[name=sale_name]').val());
+		formfile.append("sale_count",$('select[name=item_count]').val());
+		formfile.append("sale_id",my_item_id);
+
+		/*
+		sale_ktp:$('input[name=sale_ktp]').val(),
+		sale_name:$('input[name=sale_name]').val(),
+		sale_count:$('select[name=item_count]').val(),
+		sale_id:my_item_id,
+		*/
 
 		jQuery.ajax({
 			type:"POST",
 			url:"<?php echo base_url();?>index.php/sale/additem",
 			dataType:"json",
-			data:{sale_ktp:$('input[name=sale_ktp]').val(),
-			sale_name:$('input[name=sale_name]').val(),
-			sale_item:$('input[name=sale_item]').val()},
-			success:function(res){
-				alert("Sukses Membeli Item");
+			data:formfile,
+			processData:false,
+			contentType:false,
+			success:function(data){
+				alert("Berhasil Memasukkan Data");
 			}
 		});
 	});
 
+	refreshData();
 });
 
 function refreshData(){
@@ -82,7 +99,7 @@ function refreshData(){
 	});
 }
 
-setInterval(refreshData,500);
+setInterval(refreshData,5000);
 
 </script>
 
@@ -108,7 +125,8 @@ $atribute = array(
 );
 echo "<tr><td>Foto Profil </td><td>".form_input($atribute)."<img id='sale_pic' src='' width='200'/></td></tr>";
 $atribute = array(
-'name'  => 'sale_item'
+'name'  => 'sale_item',
+'disabled' => 'disabled'
 );
 echo "<tr><td>Nama Barang </td><td>".form_input($atribute)."</td></tr>";
 echo "<tr><td>Jumlah Barang </td>";
