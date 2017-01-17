@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10 Jan 2017 pada 15.45
+-- Generation Time: 17 Jan 2017 pada 12.56
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -45,7 +45,7 @@ INSERT INTO `product` (`ITEM_CODE`, `ITEM_NAME`, `ITEM_SALE`, `ITEM_PRICE`, `ITE
 (5, 'Kasur', 80000, 75000, 3, 'Furniture'),
 (6, 'Sepeda', 10000, 20000, 7, 'Kendaraan'),
 (7, 'Mobil', 10000, 20000, 4, 'Kendaraan'),
-(8, 'Motor', 10000, 25000, 7, 'Kendaraan');
+(9, 'Kasur Busa', 90000, 40000, 8, 'Furniture');
 
 -- --------------------------------------------------------
 
@@ -58,10 +58,20 @@ CREATE TABLE `sale` (
   `DATE_FACK` date NOT NULL,
   `IDCARD` varchar(100) NOT NULL,
   `NAME` varchar(100) NOT NULL,
+  `PHOTO` varchar(320) NOT NULL,
   `COUNT` int(11) NOT NULL,
-  `UNIT_PRICE` double NOT NULL,
-  `TOTAL_PRICE` double NOT NULL
+  `IDITEM` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `sale`
+--
+
+INSERT INTO `sale` (`NO_FACK`, `DATE_FACK`, `IDCARD`, `NAME`, `PHOTO`, `COUNT`, `IDITEM`) VALUES
+(13, '0000-00-00', '536363737373', 'Andong ', 'Jurina_17.jpg', 0, 4),
+(14, '0000-00-00', '684741921201', 'Sammy Krispatih', 'Jurina_8.jpg', 0, 4),
+(15, '0000-00-00', '72193112212', 'Anita Rahma', 'Jurina_15.jpg', 0, 7),
+(16, '0000-00-00', '111223444', 'Amar Fadil', 'Jurina_35.jpg', 0, 9);
 
 --
 -- Indexes for dumped tables
@@ -87,12 +97,12 @@ ALTER TABLE `sale`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ITEM_CODE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ITEM_CODE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
-  MODIFY `NO_FACK` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NO_FACK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

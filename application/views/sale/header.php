@@ -1,4 +1,4 @@
 <?php
 echo anchor("","Beli")." | ";
-echo anchor("sale/look","Pelanggan Terkini")." | ";
+echo anchor("sale/viewcustomer","Pelanggan Terkini")." | ";
 ?>
