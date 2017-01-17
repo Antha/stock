@@ -31,6 +31,45 @@ $(document).ready(function(){
 			$(this).val("");
 		}
 	});
+
+	$('#file_pic').bind("change",function(e){
+		var file = $(this).val();
+		var path = URL.createObjectURL(e.target.files[0])
+		$("img#sale_pic").attr("src",path);
+	});
+
+	$("input[type=submit]").click(function(){
+
+        /*
+		if($('input[name=sale_ktp]').val() == '')
+		{
+			alert("Isi Ktp");
+			return false;
+		}
+		if($('input[name=sale_name]').val() == '')
+		{
+			alert("Isi Nama Anda");
+			return false;
+		}
+		if($('input[name=sale_item]').val() == '')
+		{
+			alert("Isi Nama Barang");
+			return false;
+		}*/
+
+		jQuery.ajax({
+			type:"POST",
+			url:"<?php echo base_url();?>index.php/sale/additem",
+			dataType:"json",
+			data:{sale_ktp:$('input[name=sale_ktp]').val(),
+			sale_name:$('input[name=sale_name]').val(),
+			sale_item:$('input[name=sale_item]').val()},
+			success:function(res){
+				alert("Sukses Membeli Item");
+			}
+		});
+	});
+
 });
 
 function refreshData(){
@@ -57,12 +96,17 @@ setInterval(refreshData,500);
 <div id="body" style="margin-bottom:45px">
 <table class="table table-striped">
 <?php
-echo form_open_multipart();
 $atribute = array(
 'name'  => 'sale_ktp'
 );
 echo "<tr><td>No. Kartu Identitas </td><td>".form_input('sale_ktp')."</td></tr>";
 echo "<tr><td>Nama Anda </td><td>".form_input('sale_name')."</td></tr>";
+$atribute = array(
+'name'  => 'sale_pic',
+'id' => 'file_pic',
+'type' => 'file'
+);
+echo "<tr><td>Foto Profil </td><td>".form_input($atribute)."<img id='sale_pic' src='' width='200'/></td></tr>";
 $atribute = array(
 'name'  => 'sale_item'
 );
@@ -76,7 +120,6 @@ echo "<tr><td>Jumlah Barang </td>";
 <tr>
 <?php
 echo "<tr><td></td><td>".form_submit("submit","Submit")."</td></tr>";
-echo form_close();
 echo "<br/>".$alert;
 ?>
 </table>

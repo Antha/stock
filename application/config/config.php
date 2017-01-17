@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/stock';
+$config['base_url']	= 'http://localhost/stock-git';
 
 /*
 |--------------------------------------------------------------------------
